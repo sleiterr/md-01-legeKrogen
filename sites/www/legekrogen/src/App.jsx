@@ -1,52 +1,24 @@
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
-import Admin from "./components/Admin/Admin";
-import Editor from "./components/Editor/Editor";
-import Login from "./components/Login/Login";
-import Profile from "./components/Profile/Profile";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import Unauthorized from "./components/Unauthorized/Unauthorized";
+import { Routes, Route } from "react-router-dom";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Product from "./pages/Product/Product";
+import Home from "./pages/Home/Home";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Header from "./components/Header/Header";
+import "./App.css";
 
-export default function App() {
+function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route
-          path="/editor"
-          element={
-            <ProtectedRoute allowedRoles={["user", "editor", "admin"]}>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/editor"
-          element={
-            <ProtectedRoute allowedRoles={["editor", "admin"]}>
-              <Editor />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute allowedRoles={["admin"]}>
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-      <ToastContainer position="top-center" autoClose={2500} />
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/product-detail/:id" element={<ProductDetail />} />
+        </Routes>
+      </main>
     </>
   );
 }
+
+export default App;
