@@ -1,0 +1,24 @@
+import React from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { jwtDecode } from "jwt-decode";
+import { Navigate } from "react-router-dom";
+
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const [token] = useLocalStorage("token", null);
+
+  if (!token) return <Navigate to="/login" replace />;
+
+  let guest;
+  try {
+    guest = jwtDecode(token);
+  } catch {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles.length && !allowedRoles.includes(guest.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+  return children;
+};
+
+export default ProtectedRoute;
