@@ -38,7 +38,9 @@ const NewUserForm = () => {
       const res = await fetch(`${API_URL}/api/users`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage
+            .getItem("token")
+            ?.replace(/"/g, "")}`,
         },
         body: formData,
       });
@@ -63,41 +65,41 @@ const NewUserForm = () => {
       onSubmit={handleSubmit}
     >
       {({ values, setFieldValue }) => (
-        <Form className="flex flex-col gap-4 w-full">
-          <div className="flex flex-row items-center justify-center gap-4 w-full">
+        <Form className="flex flex-col">
+          <div className="mb-4 self-end">
             <ImgUploader
               // label="Avatar"
               id="picture"
               onChange={(e) => setFieldValue("picture", e.target.files[0])}
             />
-            <div className="flex flex-col items-center justify-center">
-              <InputField
-                name="name"
-                value={values.name}
-                onChange={(e) => setFieldValue("name", e.target.value)}
-                placeholder="Enter Name"
-              />
-              <InputField
-                name="email"
-                value={values.email}
-                onChange={(e) => setFieldValue("email", e.target.value)}
-                placeholder="Enter Email"
-              />
-            </div>
-            <div className="flex flex-col items-center">
-              <InputField
-                name="password"
-                value={values.password}
-                onChange={(e) => setFieldValue("password", e.target.value)}
-                placeholder="Enter password"
-              />
-              <InputField
-                name="role"
-                value={values.role}
-                onChange={(e) => setFieldValue("role", e.target.value)}
-                placeholder="admin or guest"
-              />
-            </div>
+          </div>
+          <div className="flex flex-row items-center justify-center gap-4">
+            <InputField
+              name="name"
+              value={values.name}
+              onChange={(e) => setFieldValue("name", e.target.value)}
+              placeholder="Enter Name"
+            />
+            <InputField
+              name="email"
+              value={values.email}
+              onChange={(e) => setFieldValue("email", e.target.value)}
+              placeholder="Enter Email"
+            />
+          </div>
+          <div className="flex flex-row items-center justify-center gap-4">
+            <InputField
+              name="password"
+              value={values.password}
+              onChange={(e) => setFieldValue("password", e.target.value)}
+              placeholder="Enter password"
+            />
+            <InputField
+              name="role"
+              value={values.role}
+              onChange={(e) => setFieldValue("role", e.target.value)}
+              placeholder="admin or guest"
+            />
           </div>
           <Button type="submit">Add User</Button>
         </Form>

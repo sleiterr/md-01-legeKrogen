@@ -5,7 +5,7 @@ const Button = ({ children, type = "button", ...rest }) => {
     <button
       type={type}
       {...rest}
-      className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition w-full cursor-pointer"
+      className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 transition w-full cursor-pointer"
     >
       {children}
     </button>
