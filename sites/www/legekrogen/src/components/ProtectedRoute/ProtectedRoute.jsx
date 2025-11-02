@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
